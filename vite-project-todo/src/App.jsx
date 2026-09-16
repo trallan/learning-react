@@ -58,6 +58,7 @@ function App() {
         <li>Store data (in memory for now)</li>
         <li>Edit data</li>
         <li>Delete data</li>
+        <li>Add filter for completed todo's</li>
       </ol>
     </section>
      
