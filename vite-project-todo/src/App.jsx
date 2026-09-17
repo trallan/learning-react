@@ -5,6 +5,7 @@ function App() {
   const [inputValue, setInputValue] = useState("");
   const [nextId, setNextId] = useState(0);
   const [data, setData] = useState([])
+  const [filter, setFilter] = useState("all");
 
   function addTodo() {
     setData(prevData => [
@@ -43,6 +44,18 @@ function App() {
     );
   }
 
+  const filteredData = data.filter(todo => {
+    if (filter === "completed") {
+      return todo.completed;
+    }
+
+    if (filter === "notCompleted") {
+      return !todo.completed;
+    }
+
+    return true;
+  });
+
   return (
     <>
 
@@ -74,6 +87,23 @@ function App() {
         <button onClick={addTodo}>Submit</button>
       </div>
 
+      <section id="filter-section">
+          <span>Filter</span>
+          <div>
+            <button onClick={() => setFilter("completed")}>
+              Completed
+            </button>
+
+            <button onClick={() => setFilter("notCompleted")}>
+              Not Completed
+            </button>
+
+            <button onClick={() => setFilter("all")}>
+              All
+            </button>
+          </div>
+      </section>
+
       <table>
         <thead>
           <tr>
@@ -84,7 +114,7 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          {data.map(todo =>
+          {filteredData.map(todo =>
             <tr key={todo.id}>
               <td>{todo.id}</td>
               <td>{todo.text}</td>
